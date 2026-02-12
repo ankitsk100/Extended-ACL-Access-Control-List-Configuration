@@ -6,8 +6,6 @@ Only **IT department PCs** can access the **DHCP server**
 All other hosts are blocked from reaching the DHCP server  
 All hosts can still access other destinations (example: Server1)
 
-> Note: The task statement says “standard ACL”, but the configuration used here is an **extended ACL** (source + destination matching).
-
 ---
 
 ## Topology
