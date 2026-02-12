@@ -1,0 +1,32 @@
+! ============================================
+! Device: R1
+! Lab: Extended ACL — IT Only Access to DHCP Server
+! Policy:
+!   - Permit IT PCs (192.168.1.10, 192.168.1.20) to reach DHCP server (10.10.10.10)
+!   - Deny everyone else to DHCP server
+!   - Permit all other traffic
+! Apply:
+!   - Inbound on G0/0 (LAN side)
+! ============================================
+
+enable
+configure terminal
+
+ip access-list extended IT_ONLY
+ permit ip host 192.168.1.10 host 10.10.10.10
+ permit ip host 192.168.1.20 host 10.10.10.10
+ deny ip any host 10.10.10.10
+ permit ip any any
+exit
+
+interface gigabitEthernet0/0
+ ip access-group IT_ONLY in
+exit
+
+end
+write memory
+
+! Verification
+! show access-lists
+! show ip interface gigabitEthernet0/0
+! show running-config | section ip access-list
